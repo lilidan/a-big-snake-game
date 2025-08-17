@@ -128,12 +128,21 @@ class SnakeGame {
             }
         }
 
-        const hitLeftWall = this.snake[0].x < 0;
-        const hitRightWall = this.snake[0].x >= this.tileCount;
-        const hitToptWall = this.snake[0].y < 0;
-        const hitBottomWall = this.snake[0].y >= this.tileCount;
+        // Wrap around walls
+        if (this.snake[0].x < 0) {
+            this.snake[0].x = this.tileCount - 1;
+        }
+        if (this.snake[0].x >= this.tileCount) {
+            this.snake[0].x = 0;
+        }
+        if (this.snake[0].y < 0) {
+            this.snake[0].y = this.tileCount - 1;
+        }
+        if (this.snake[0].y >= this.tileCount) {
+            this.snake[0].y = 0;
+        }
 
-        return hitLeftWall || hitRightWall || hitToptWall || hitBottomWall;
+        return false;
     }
 
     gameOver() {
